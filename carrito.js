@@ -100,7 +100,7 @@ function sumarStock(productoAgregar) {
 function mostrarcarrito(productoAgregar) {
   let div = document.createElement(`div`);
   div.setAttribute("id", "list");
-  div.innerHTML = `<img id="imgCarro" src="${productoAgregar.imagen}">  <p id="cantidad${productoAgregar.codigo}">${productoAgregar.cantidad}</p>  ${productoAgregar.nombre} ||Código: ${productoAgregar.codigo}|| -- <p id="precioCarro${productoAgregar.codigo}">$${productoAgregar.precio}</p> <button class="btnEliminar" id="btnEliminar${productoAgregar.codigo}">X</button>`
+  div.innerHTML = `<img id="imgCarro" src="${productoAgregar.imagen}">  <p id="cantidad${productoAgregar.codigo}">${productoAgregar.cantidad}</p>  ${productoAgregar.nombre} <p id="code">||Código: ${productoAgregar.codigo}||</p> -- <p id="precioCarro${productoAgregar.codigo}">$${productoAgregar.precio}</p> <button class="btnEliminar" id="btnEliminar${productoAgregar.codigo}">X</button>`
   document.getElementById("contenedor").appendChild(div);
   sumarCarrito();
   eliminarProducto(productoAgregar)
