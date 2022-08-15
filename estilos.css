@@ -1,0 +1,274 @@
+body {
+  margin: 0;
+  background-image: url(imagenes/fashion.webp);
+}
+
+#principio {
+  font-size: 7.5vw;
+  color: rgba(0, 0, 255, 0.364);
+}
+
+.articulo {
+  background-color: rgba(250, 59, 25, 0.213);
+  margin: 15px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  border: 10px solid red;
+  border-radius: 0 35px;
+  width: 230px;
+  height: 360px;
+  text-align: center;
+  padding: 10px;
+  padding-bottom: 24px;
+  box-shadow: 4px 4px 25px gray;
+}
+
+i {
+  font-size: 30px;
+}
+i:hover {
+  font-size: 35px;
+}
+
+.carro {
+  position: absolute;
+  list-style: none;
+  right: 70px;
+  color: white;
+}
+.x {
+  position: absolute;
+  right: 18px;
+  font-size: 20px;
+  color: white;
+}
+#barra {
+  position: absolute;
+}
+
+#esconder {
+  position: absolute;
+  display: none;
+  font-size: 30px;
+  width: 200px;
+  height: 70px;
+  right: 200px;
+}
+
+.carro_lista {
+  position: fixed;
+  left: 0;
+  bottom: -15px;
+  top: 60px;
+  right: 0;
+  background-color: rgba(83, 11, 11, 0.913);
+  display: grid;
+  list-style: none;
+  clip-path: circle(0% at top right);
+  transition: clip-path 0.4s;
+}
+.carro_lista:target {
+  clip-path: circle(150% at top right);
+  z-index: 2;
+}
+p{
+  display: contents;
+}
+#list { 
+  text-align: center;
+  align-items: top; 
+  font-size: 28px;
+}
+.btnEliminar {
+  font-size: 25px;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+#nav {
+  height: 80px;
+  background-image: linear-gradient(to right, rgb(247, 30, 30), rgb(203, 44, 44), rgb(110, 9, 9));
+  color: white;
+  display: none;
+  align-items: center;
+  border-radius: 0 0 20px 20px;
+}
+
+h1 {
+  position: absolute;
+  font-family: 'Courgette', cursive;
+    font-size: 32px;
+    color: white;
+    text-shadow: 3px 3px 10px white;
+    left: 40px;
+}
+h2 {
+  color: white;
+  text-align: center;
+  text-decoration: underline;
+  font-size: 19px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  margin-top: 0;
+}
+h3 {
+  font-size: 26px;
+  margin: 7px;
+}
+h4 {
+  margin: 0;
+  padding: 6px;
+}
+
+.nombre {
+  height: 60px;
+}
+
+.precio {
+  width: 230px;
+  height: 30px;
+}
+.pre {
+  display: contents;
+}
+.codigo {
+  position: absolute;
+  margin-top: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 1px solid white;
+}
+
+.imagen {
+  width: 220px;
+  height: 190px;
+  border-radius: 0 35px;
+  border: solid 1px white;
+  margin-bottom: 10px;
+  box-shadow: 7px 7px 10px rgb(38, 38, 38);
+}
+#imgCarro {
+  display: inline-flexbox;
+  width: 40px;
+  height: 40px;
+  border: solid 1px white;
+  margin-bottom: 10px;
+  box-shadow: 7px 7px 10px rgb(38, 38, 38);
+  border-radius: 50%;
+}
+
+#btnEliminarPedido {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top: 20px;
+  right: 20px;
+  background-color: red;
+  border-radius: 50%;
+  font-size: 20px;
+  font-weight: bolder;
+}
+#btnComprar {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  bottom: 20px;
+  right: 20px;
+  background-color: green;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: bolder;
+}
+
+.stock {
+  position: absolute;
+  background-color: red;
+  border-radius: 50%;
+  padding: 4px;
+  font-size: 20px;
+  margin-top: -207px;
+  margin-left: 6px;
+}
+
+section {
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.button {
+  background-color: rgb(193, 190, 190);
+  position: relative;
+  margin-top: 8px;
+  right: -40px;
+  width: 150px;
+  height: 65px;
+  font-size: 25px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  box-shadow: 3px 3px 10px gray;
+  border-radius: 15px;
+  z-index: 1;
+}
+.button span {
+  position: relative;
+}
+.button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: blue;
+  border-radius: 10px;
+  opacity: 0.4;
+  clip-path: circle(0 at center);
+  transition: 0.6s ease-out;
+}
+.button:hover:before {
+  clip-path: circle(100px at center);
+}
+
+@media only screen and (max-width: 730px) {
+  h1 {
+    font-size: 22px;
+    margin-left: -30px;
+  }
+  i {
+    font-size: 20px;
+  }
+  h2 {
+    font-size: 23px;
+  }
+  h3 {
+    font-size: 20px;
+  }
+  .articulo {
+    margin-left: 60px;
+  }
+  #esconder {
+    font-size: 15px;
+    right: 0px;
+  }
+  #btnEliminarPedido{
+    width: 50px;
+    height: 50px;
+    font-size: 10px;
+    left: 10px;
+  }
+  #btnComprar {
+    width: 50px;
+    height: 50px;
+    font-size: 7px;
+    left: 10px;
+  }
+  #list {
+    font-size: 18px;
+  }
+  .btnEliminar {
+    font-size: 10px;
+  }
+  #imgCarro {
+    display: none;
+  }
+}
