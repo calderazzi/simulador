@@ -78,8 +78,7 @@ p{
   font-size: 28px;
 }
 .btnEliminar {
-  font-size: 25px;
-  font-weight: bold;
+  height: 45px;
   border-radius: 50%;
 }
 
