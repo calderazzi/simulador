@@ -29,6 +29,20 @@ i:hover {
   font-size: 35px;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+#barra {
+  position: absolute;
+  top: 50%;
+  left: 37%;
+  text-align: center;
+  width: 400px;
+  height: 50px;
+}
+
 .carro {
   position: absolute;
   list-style: none;
@@ -51,6 +65,16 @@ i:hover {
   height: 70px;
   right: 200px;
 }
+
+#contador {
+  position: absolute;
+  color: white;
+  font-size: 30px;
+  right: -123px;
+  top: -8px;
+  font-weight: bolder;
+  z-index: 1;
+ }
 
 .carro_lista {
   position: fixed;
@@ -178,7 +202,12 @@ h4 {
   border-radius: 50%;
   font-size: 20px;
   font-weight: bolder;
+  cursor: pointer;
 }
+#btnEliminarPedido:active {
+  transform: scale(0.9);
+}
+
 #btnComprar {
   position: absolute;
   width: 80px;
@@ -189,6 +218,10 @@ h4 {
   border-radius: 50%;
   font-size: 13px;
   font-weight: bolder;
+  cursor: pointer;
+}
+#btnComprar:active {
+  transform: scale(0.9);
 }
 
 .stock {
@@ -221,6 +254,9 @@ section {
   border-radius: 15px;
   cursor: pointer;
   z-index: 1;
+}
+.button:active {
+  transform: scale(0.9);
 }
 .button span {
   position: relative;
@@ -265,6 +301,12 @@ section {
  #esconder {
   top: 10px;
  }
+ #barra {
+  left: 23%;
+  text-align: center;
+  width: 200px;
+  height: 30px;
+}
   h1 {
     font-size: 18px;
     margin-left: -30px;
@@ -291,13 +333,16 @@ section {
     width: 50px;
     height: 50px;
     font-size: 10px;
-    left: 10px;
+    right: 10px;
+    top: auto;
+    bottom: 5px;
   }
   #btnComprar {
     width: 50px;
     height: 50px;
     font-size: 7px;
     left: 10px;
+    bottom: 5px;
   }
   #list {
     font-size: 18px;

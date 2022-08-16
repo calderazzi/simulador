@@ -1,5 +1,6 @@
 setTimeout(function(){
 document.getElementById("principio").style.display = "none";
+document.getElementById("barra").style.display = "none";
 document.getElementById("nav").style.display = "flex";
 document.getElementById("body").style.backgroundImage = "radial-gradient(rgb(123, 18, 18), black)"
 
@@ -74,7 +75,7 @@ function crearBotones() {
   if(carrito.length == 1) {
     document.getElementById("iconoCarrito").style.color = "red"
     let div = document.createElement(`div`);
-      div.innerHTML = `<button id="btnEliminarPedido">Borrar Pedido</button>`;
+      div.innerHTML = `<button id="btnEliminarPedido"><a href="index.html">Borrar Pedido</a></button>`;
       listaCarrito.appendChild(div); 
       let borrarCarro = document.getElementById(`btnEliminarPedido`);
   borrarCarro.addEventListener(`click`,()=> {
@@ -82,7 +83,7 @@ function crearBotones() {
     actualizarStock();
   })
     let divcomprar = document.createElement(`div`);
-      divcomprar.innerHTML = `<button id="btnComprar">COMPRAR</button>`;
+      divcomprar.innerHTML = `<button id="btnComprar"><a href="#body">COMPRAR</button></a></button>`;
       listaCarrito.appendChild(divcomprar); 
       let comprar = document.getElementById(`btnComprar`);
   comprar.addEventListener(`click`,()=> {
@@ -136,6 +137,7 @@ function eliminarProducto(productoAgregar) {
 }
 
 function sumarCarrito() {
+  contadorCarro()
   precioTotal.innerText = carrito.reduce((acc,num)=> acc + num.precio, 0);
   let tot = document.getElementById("total").innerText;
   if(tot == 0) {
@@ -199,5 +201,11 @@ function verificarCargar() {
   }
 }
 
+function contadorCarro() {
+  let cantidadCarro = carrito.length
+  console.log(cantidadCarro);
+  document.getElementById("contador").innerText = cantidadCarro;
+}
 
-},1500);
+
+},1900);
