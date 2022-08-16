@@ -9,20 +9,22 @@ const listaCarrito = document.getElementById(`carro`);
 const precioTotal = document.getElementById(`total`);
 
 mostrarProductos();
+verificarCargar();
 
 function mostrarProductos() {
   arrayProductos.forEach(prod => { 
     let div = document.createElement(`div`);
     div.className = `container`;
-    div.innerHTML = `<div id="card" class="articulo">
+    div.innerHTML = `<div id="card${prod.codigo}" class="articulo">
                       <div class="nombre"><h2>${prod.nombre}</h2></div>
-                      <img class="imagen" src="${prod.imagen}">
+                      <img id="imagen${prod.codigo}" class="imagen" src="${prod.imagen}">
+                      <div class="sinStock" id="sinStock${prod.codigo}">SIN STOCK</div>
                       <div class="stock" id="stockCard${prod.codigo}">${prod.stock}</div>
                       <div class="precio">
                         <h3 class="pre">Precio: $</h3>
                         <h3 class="pre">${prod.precio}</h3>
                       </div>
-                      <div class="codigo">
+                      <div id="codigo${prod.codigo}" class="codigo">
                         <h4>Código</h4>  
                         <h4>${prod.codigo}</h4>
                       </div>
@@ -33,6 +35,7 @@ function mostrarProductos() {
   let btnAgregar = document.getElementById(`btn${prod.codigo}`)
   btnAgregar.addEventListener(`click`,()=> {
     agregarCarrito(prod.codigo);
+    sinStock(prod.codigo);
   })
   })
 }
@@ -47,8 +50,9 @@ function agregarCarrito(prod) {
     document.getElementById(`cantidad${estaEnCarrito.codigo}`).innerHTML = `<p id="cantidad${estaEnCarrito.cantidad}">${estaEnCarrito.cantidad}</p>`
     document.getElementById(`precioCarro${estaEnCarrito.codigo}`).innerHTML = `<p id="precioCarro${estaEnCarrito.codigo}">$${precioNuevo}</p>`
     carrito.push(estaEnCarrito);
-    mermarStock(estaEnCarrito)
-    sumarCarrito();
+    mermarStock(estaEnCarrito);
+    sumarCarrito()
+    guardar();
     }
   }else{
     let contenedor = document.createElement(`div`);
@@ -62,6 +66,7 @@ function agregarCarrito(prod) {
     document.getElementById(`esconder`).style.display = "flex";
     mermarStock(productoAgregar)
     mostrarcarrito(productoAgregar);
+    guardar();
   }
 }
 
@@ -95,6 +100,9 @@ function sumarStock(productoAgregar) {
   let stockCard = document.getElementById(`stockCard${productoAgregar.codigo}`).innerText;
   stockCard++;
   document.getElementById(`stockCard${productoAgregar.codigo}`).innerText = stockCard;
+  if(stockCard == 1) {
+    conStock(productoAgregar);
+  }
 } 
 
 function mostrarcarrito(productoAgregar) {
@@ -103,7 +111,7 @@ function mostrarcarrito(productoAgregar) {
   div.innerHTML = `<img id="imgCarro" src="${productoAgregar.imagen}">  <p id="cantidad${productoAgregar.codigo}">${productoAgregar.cantidad}</p>  ${productoAgregar.nombre} <p id="code">||Código: ${productoAgregar.codigo}||</p> -- <p id="precioCarro${productoAgregar.codigo}">$${productoAgregar.precio}</p> <button class="btnEliminar" id="btnEliminar${productoAgregar.codigo}"><i class="fa-solid fa-trash-can"></i></button>`
   document.getElementById("contenedor").appendChild(div);
   sumarCarrito();
-  eliminarProducto(productoAgregar)
+  eliminarProducto(productoAgregar);
 }
 
 function eliminarProducto(productoAgregar) {
@@ -146,12 +154,50 @@ function comprarCarrito() {
 }
 
 function borrarCarrito() {
+  localStorage.clear();
   document.getElementById('contenedor').innerHTML = '';
   carrito = [];
   sumarCarrito();
 }
 
+function sinStock(prod) {
+  let cant = document.getElementById(`stockCard${prod}`).innerText;
+  if(cant == 0) {
+    document.getElementById(`card${prod}`).style.backgroundColor = "grey";
+    document.getElementById(`card${prod}`).style.border = "10px solid grey";
+    document.getElementById(`imagen${prod}`).style.filter = "grayscale(1)";
+    document.getElementById(`codigo${prod}`).style.backgroundColor = "grey";
+    document.getElementById(`codigo${prod}`).style.border = "none";
+    document.getElementById(`sinStock${prod}`).style.display = "block";
+  }
+  }
+  function conStock(prod){
+    document.getElementById(`card${prod.codigo}`).style.backgroundColor = "rgba(250, 59, 25, 0.213)";
+    document.getElementById(`card${prod.codigo}`).style.border = "10px solid red";
+    document.getElementById(`imagen${prod.codigo}`).style.filter = "none";
+    document.getElementById(`codigo${prod.codigo}`).style.backgroundColor = "rgb(164, 21, 21)";
+    document.getElementById(`codigo${prod.codigo}`).style.border = "1px solid red";
+    document.getElementById(`sinStock${prod.codigo}`).style.display = "none";
+  }
+
 function actualizarStock() {
   location.reload();
 }
+
+function guardar() {
+    localStorage.setItem("carroOlvidado",JSON.stringify(carrito));
+}
+
+function verificarCargar() {
+  let arrayCarrito = JSON.parse(localStorage.getItem("carroOlvidado"));
+  if(arrayCarrito) {
+    alert(`TU CARRITO TE ESPERA!!!
+  COMPRALO AHORA!!`)
+    for(elemento of arrayCarrito ) {
+     agregarCarrito(elemento.codigo);
+    }
+  }
+}
+
+
 },1500);

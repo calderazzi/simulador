@@ -106,7 +106,7 @@ h2 {
   color: white;
   text-align: center;
   text-decoration: underline;
-  font-size: 19px;
+  font-size: 24px;
   font-family: Georgia, 'Times New Roman', Times, serif;
   margin-top: 0;
 }
@@ -116,7 +116,7 @@ h3 {
 }
 h4 {
   margin: 0;
-  padding: 6px;
+  padding: 0;
 }
 
 .nombre {
@@ -132,11 +132,12 @@ h4 {
 }
 .codigo {
   position: absolute;
-  margin-top: 10px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  border: 1px solid white;
+  margin-top: 20px;
+  width: 55px;
+  height: 40px;
+  border-radius: 30%;
+  border: 1px solid red;
+  background-color: rgb(164, 21, 21);
 }
 #code {
   display: none;
@@ -218,6 +219,7 @@ section {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   box-shadow: 3px 3px 10px gray;
   border-radius: 15px;
+  cursor: pointer;
   z-index: 1;
 }
 .button span {
@@ -238,6 +240,19 @@ section {
 }
 .button:hover:before {
   clip-path: circle(100px at center);
+}
+
+.sinStock {
+  position: absolute;
+  display: none;
+  color: black;
+  background-color: rgba(128, 128, 128, 0.382);
+  font-weight: bolder;
+  margin-top: -150px;
+  font-size: 45px;
+  transform: rotate(-45deg);
+  border-radius: 15px;
+  padding: 5px;
 }
 
 @media only screen and (max-width: 730px) {
