@@ -2,7 +2,7 @@ setTimeout(function(){
 document.getElementById("principio").style.display = "none";
 document.getElementById("barra").style.display = "none";
 document.getElementById("nav").style.display = "flex";
-document.getElementById("body").style.backgroundImage = "radial-gradient(rgb(123, 18, 18), black)"
+document.getElementById("body").style.backgroundImage = "radial-gradient(rgb(35, 35, 142), rgb(23, 170, 94))"
 
 let carrito = [];
 const listaProductos = document.getElementById(`container`);
@@ -18,7 +18,9 @@ function mostrarProductos() {
     div.className = `container`;
     div.innerHTML = `<div id="card${prod.codigo}" class="articulo">
                       <div class="nombre"><h2>${prod.nombre}</h2></div>
-                      <img id="imagen${prod.codigo}" class="imagen" src="${prod.imagen}">
+                      <div class="cont">
+                      <img id="imagen${prod.codigo}" class="imagen" src="${prod.imagen}"><p class="descripcion">Descripción: ${prod.descripcion}</p>
+                      </div>
                       <div class="sinStock" id="sinStock${prod.codigo}">SIN STOCK</div>
                       <div class="stock" id="stockCard${prod.codigo}">${prod.stock}</div>
                       <div class="precio">
@@ -31,6 +33,7 @@ function mostrarProductos() {
                       </div>
                         <button id="btn${prod.codigo}" class="button"><span>AGREGAR</span></button>
                       </div>
+                      
                     </div>`;
   listaProductos.appendChild(div); 
   let btnAgregar = document.getElementById(`btn${prod.codigo}`)
@@ -73,7 +76,7 @@ function agregarCarrito(prod) {
 
 function crearBotones() {
   if(carrito.length == 1) {
-    document.getElementById("iconoCarrito").style.color = "red"
+    document.getElementById("iconoCarrito").style.color = "blue"
     let div = document.createElement(`div`);
       div.innerHTML = `<button id="btnEliminarPedido"><a href="index.html">Borrar Pedido</a></button>`;
       listaCarrito.appendChild(div); 
@@ -141,7 +144,7 @@ function sumarCarrito() {
   precioTotal.innerText = carrito.reduce((acc,num)=> acc + num.precio, 0);
   let tot = document.getElementById("total").innerText;
   if(tot == 0) {
-    document.getElementById("iconoCarrito").style.color = "white"
+    document.getElementById("iconoCarrito").style.color = "rgb(14, 46, 14)"
     document.getElementById(`esconder`).style.display = "none";
     let elimPedido = document.getElementById("btnEliminarPedido");
     let botonComprar = document.getElementById("btnComprar");
@@ -171,15 +174,17 @@ function sinStock(prod) {
     document.getElementById(`codigo${prod}`).style.backgroundColor = "grey";
     document.getElementById(`codigo${prod}`).style.border = "none";
     document.getElementById(`sinStock${prod}`).style.display = "block";
+    document.getElementById(`btn${prod}`).style.backgroundColor = "grey";
   }
   }
   function conStock(prod){
     document.getElementById(`card${prod.codigo}`).style.backgroundColor = "rgba(250, 59, 25, 0.213)";
-    document.getElementById(`card${prod.codigo}`).style.border = "10px solid red";
+    document.getElementById(`card${prod.codigo}`).style.border = "10px solid rgb(72, 211, 30)";
     document.getElementById(`imagen${prod.codigo}`).style.filter = "none";
-    document.getElementById(`codigo${prod.codigo}`).style.backgroundColor = "rgb(164, 21, 21)";
-    document.getElementById(`codigo${prod.codigo}`).style.border = "1px solid red";
+    document.getElementById(`codigo${prod.codigo}`).style.backgroundColor = "rgb(22, 96, 47)";
+    document.getElementById(`codigo${prod.codigo}`).style.border = "1px solid rgb(34, 255, 0)";
     document.getElementById(`sinStock${prod.codigo}`).style.display = "none";
+    document.getElementById(`btn${prod.codigo}`).style.backgroundColor = "rgb(84, 159, 98)";
   }
 
 function actualizarStock() {
