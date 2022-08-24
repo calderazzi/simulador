@@ -31,9 +31,20 @@ body::-webkit-scrollbar {
 }
 #articulos {
   display: none;
-  margin-left: 50px;
   margin-top: 170px;
-  font-size: 25px;
+  font-size: 35px;
+  font-weight: bolder;
+  color: rgb(0, 0, 0);
+  background-color: rgba(0, 255, 255, 0.701);
+  padding: 15px;
+}
+input[type=radio] {
+  width: 25px;
+  height: 25px;
+}
+legend {
+  background-color: rgba(10, 101, 147, 0.647);
+  color: white;
 }
 .content {
   width: 550px;

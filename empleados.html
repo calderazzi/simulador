@@ -18,7 +18,14 @@
     <input class="input" id="ingresar" type="button" value="ingresar">
   </form>
 
-  <input id="articulos" class="input" type="button" value="Articulos">
+  <fieldset id="articulos">
+    <legend>Seleccione una propiedad</legend>
+    <p><label id="nombreArticulos" class="radio"> <input type="radio" name="prioridad" value="productos" >productos</label></p><br>
+    <p><label id="stockArticulos" class="radio"> <input type="radio" name="prioridad" value="stock menor a mayor">stock menor a mayor</label></p><br>
+    <p><label id="precioArticulos" class="radio"> <input type="radio" name="prioridad" value="precio menor a mayor" >precio menor a mayor</label></p>        
+  </fieldset>
+
+  <!-- <input id="articulos" class="input" type="button" value="Articulos"> -->
   <ul id="listaArticulos">
 
   </ul>
