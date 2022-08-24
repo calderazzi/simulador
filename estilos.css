@@ -2,6 +2,46 @@ body {
   margin: 0;
   background-image: url(imagenes/fashion.webp);
 }
+body::-webkit-scrollbar {
+  display: none;
+}
+
+.body {
+  margin: 0;
+  background-image: url(imagenes/fashion.webp);
+}
+#encargados {
+  position: absolute;
+  font-size: 5vw;
+  top: 0;
+}
+.form {
+  margin-top: 200px;
+  margin-left: 20px;
+  font-size: 30px;
+  background-color: aqua;
+  width: 400px;
+  border-radius: 15px;
+  border: rgb(32, 223, 32) 10px solid;
+  padding: 10px;
+}
+.input {
+  font-size: 20px;
+  border-radius: 10px;
+}
+#articulos {
+  display: none;
+  margin-left: 50px;
+  margin-top: 170px;
+  font-size: 25px;
+}
+.content {
+  width: 550px;
+  background-color: rgba(17, 87, 16, 0.716);
+  font-size: 28px;
+  color: white;
+  padding: 1px;
+}
 
 #principio {
   font-size: 7.5vw;
@@ -132,7 +172,7 @@ h1 {
     font-size: 32px;
     color: rgb(32, 223, 32);
     text-shadow: 3px 3px 10px rgb(255, 255, 255);
-    left: 40px;
+    left: 30px;
 }
 h2 {
   color: rgb(11, 51, 11);
@@ -313,6 +353,11 @@ section {
 }
 
 @media only screen and (max-width: 730px) {
+  .content {
+    font-size: 20px;
+    margin-left: -35px;
+    width: 370px;
+  }
   .carro_lista {
     top: 20px;
   }
