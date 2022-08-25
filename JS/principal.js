@@ -23,7 +23,7 @@ function MostrarProductos() {
                       <div class="stock" id="stockCard${prod.codigo}">${prod.stock}</div>
                       <div class="precio">
                         <h3 class="pre">Precio: $</h3>
-                        <h3 class="pre">${prod.precio}</h3>
+                        <h3 class="pre" id="precio${prod.codigo}">${prod.precio}</h3>
                       </div>
                       <div id="codigo${prod.codigo}" class="codigo">
                         <h4>Código</h4>  

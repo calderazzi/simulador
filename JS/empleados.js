@@ -1,6 +1,5 @@
 
 let ingresar = document.getElementById("ingresar");
-
 ingresar.addEventListener(`click`, ()=> {
   let nombreIngresado = document.getElementById("nombre").value;
   let passwordIngresado = document.getElementById("password").value;
