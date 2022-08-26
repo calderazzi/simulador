@@ -1,7 +1,7 @@
 let arrayProductos = [
   {codigo: 1,  nombre: `Anteojo de descanso`, precio: 5000, stock: 10, imagen: `imagenes/accesorios/anteojos1.jpg`, descripcion: "Anteojos de descanso colores a elección estilo lectura, ideal para descansar la vista."},
   {codigo: 2, nombre: `Anteojo fashion`, precio: 4500, stock: 15, imagen: `imagenes/accesorios/anteojos2.jpg`, descripcion: "Anteojos para ver de lejos estilo fashion marco grande colores varios."},
-  {codigo: 3, nombre: `Anteojo de sol tornasolado`, precio: 10000, stock: 20, imagen: `imagenes/accesorios/anteojos3.jpg`, descripcion: "Anteojos de sol tornasolados con estuche incluido, adaptables al contorno del rostro."},
+  {codigo: 19, nombre: `Anteojo de sol tornasolado`, precio: 10000, stock: 20, imagen: `imagenes/accesorios/anteojos3.jpg`, descripcion: "Anteojos de sol tornasolados con estuche incluido, adaptables al contorno del rostro."},
   {codigo: 4, nombre: `Anillo plata con diamante`, precio: 20000, stock: 25, imagen: `imagenes/accesorios/anillo1.jpg`, descripcion: "Anillo de plata 920 con un hermoso diamante ideal para compromiso."},
   {codigo: 5, nombre: `Anillo de fantasía`, precio: 1000, stock: 50, imagen: `imagenes/accesorios/anillo2.jpg`, descripcion: "Anillos de fantasía de diferentes modelos en oferta."},
   {codigo: 6, nombre: `Anillo de oro 18k`, precio: 2500, stock: 20, imagen: `imagenes/accesorios/anillo3.jpg`, descripcion: "Anillo de oro 18k con diferentes piedras preciosas a eleccion."},

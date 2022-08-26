@@ -4,39 +4,40 @@ const listaCarrito = document.getElementById(`carro`); //Contenedor lista del ca
 const precioTotal = document.getElementById(`total`); //Precio total del carrito.
 let contador = document.getElementById("contador").innerText;
 
-function AgregarCarrito(prod) {
-  let estaEnCarrito = carrito.find(product => product.codigo === prod); //Buscar en el carrito el producto.
+function AgregarCarrito(code) {
+  let estaEnCarrito = carrito.find(producto => producto.codigo === code); //Buscar en el carrito el producto.
   if(estaEnCarrito) { //Si esta...
-    let precioCard = document.getElementById(`precio${prod}`).innerText; //Traer precio.
-    let stockCard = document.getElementById(`stockCard${prod}`).innerText; //Traer el stock del producto.
+    let precioCard = document.getElementById(`precio${code}`).innerText; //Traer precio.
+    let stockCard = document.getElementById(`stockCard${code}`).innerText; //Traer el stock del producto.
     if(stockCard > 0) { //Si hay stock...
     estaEnCarrito.cantidad++; //agregamos 1.
     estaEnCarrito.precio += Number(precioCard); //Sumamos el precio.
     document.getElementById(`cantidad${estaEnCarrito.codigo}`).innerHTML = `<p id="cantidad${estaEnCarrito.cantidad}">${estaEnCarrito.cantidad}</p>`; //Cambiar la cantidad del producto.
     document.getElementById(`precioCarro${estaEnCarrito.codigo}`).innerHTML = `<p id="precioCarro${estaEnCarrito.codigo}">$${estaEnCarrito.precio}</p>`; //Cambiar el sub total del producto.
-    MermarStock(estaEnCarrito); 
-    SumarCarrito(); 
-    carritoStorage.push(estaEnCarrito);
-    GuardarStorage(); 
-    SinStock(estaEnCarrito.codigo); 
-    ContadorCarrito();
+    Actualizacion(estaEnCarrito);
 
     }
   }else{ //Si no esta en el carrito.
     let contenedor = document.createElement(`div`); //Creación de div.
     contenedor.setAttribute("id", "contenedor"); //Id al div.
     listaCarrito.appendChild(contenedor); //Agregamos un hijo en el contenedor.
-    let productoAgregar = arrayProductos.find(item=> item.codigo == prod); //Buscamos el producto en el array de productos.
+    let productoAgregar = arrayProductos.find(item=> item.codigo === code); //Buscamos el producto en el array de productos.
     productoAgregar.cantidad = 1; //Ingresar su cantidad.
     carrito.push(productoAgregar); //Agregar el producto al carrito.
     CrearBotones(); //Crear los botones del carrito.
     document.getElementById(`esconder`).style.display = "flex"; //Mostrar el total.
-    MermarStock(productoAgregar); 
-    MostrarCarrito(productoAgregar); 
-    carritoStorage.push(productoAgregar);
-    GuardarStorage(); 
-    ContadorCarrito();
+    Actualizacion(productoAgregar);
+    MostrarCarrito(productoAgregar)
   }
+}
+
+function Actualizacion(producto) {
+  MermarStock(producto); 
+  SumarCarrito(); 
+  carritoStorage.push(producto);
+  GuardarStorage(); 
+  SinStock(producto.codigo); 
+  ContadorCarrito();
 }
 
 function CrearBotones() {
@@ -86,7 +87,11 @@ function CrearBotones() {
 function MostrarCarrito(productoAgregar) { 
   let div = document.createElement(`div`); //Creación de div.
   div.setAttribute("id", "list"); //Id del div.
-  div.innerHTML = `<img id="imgCarro" src="${productoAgregar.imagen}">  <p id="cantidad${productoAgregar.codigo}">${productoAgregar.cantidad}</p>  ${productoAgregar.nombre}<p id="precioCarro${productoAgregar.codigo}">$${productoAgregar.precio}</p> <button class="btnEliminar" id="btnEliminar${productoAgregar.codigo}"><i class="fa-solid fa-trash-can"></i></button>`; //Creación de la estructura html del producto en el carrito.
+  div.innerHTML = `<img id="imgCarro" src="${productoAgregar.imagen}">
+                   <p id="cantidad${productoAgregar.codigo}">${productoAgregar.cantidad}</p>
+                   <p>${productoAgregar.nombre}</p>
+                   <p id="precioCarro${productoAgregar.codigo}">$${productoAgregar.precio}</p>
+                   <button class="btnEliminar" id="btnEliminar${productoAgregar.codigo}"><i class="fa-solid fa-trash-can"></i></button>`; //Creación de la estructura html del producto en el carrito.
   document.getElementById("contenedor").appendChild(div); //Creación de un hijo en el contenedor.
   SumarCarrito();
   EliminarProducto(productoAgregar); 
@@ -101,17 +106,19 @@ function EliminarProducto(productoAgregar) {
       productoAgregar.precio -= precioCard;
       document.getElementById(`cantidad${productoAgregar.codigo}`).innerHTML = `<p id="cantidad${productoAgregar.cantidad}">${productoAgregar.cantidad}</p>`; //Cambio de la cantidad en el carrito.
       document.getElementById(`precioCarro${productoAgregar.codigo}`).innerHTML = `<p id="precioCarro${productoAgregar.codigo}">$${productoAgregar.precio}</p>`; //Cambio del subtotal en el carrito.
-      SumarStock(productoAgregar);
-      SumarCarrito();
-      ContadorMermaCarrito();
+      ActualizarEliminar(productoAgregar);
     }else{ //Si es menor a 1...
       carrito = carrito.filter(item => item.codigo !== productoAgregar.codigo); //Filtrar todos los productos que no sean el que se va a eliminar.
       btnEliminar.parentElement.remove(); //Eliminar el div que contiene el producto.
-      SumarStock(productoAgregar);
-      SumarCarrito();
-      ContadorMermaCarrito();
+      ActualizarEliminar(productoAgregar);
     }
   })
+}
+
+function ActualizarEliminar(producto) {
+  SumarStock(producto);
+  SumarCarrito();
+  ContadorMermaCarrito();
 }
 
 function SumarCarrito() {
@@ -156,11 +163,11 @@ function GuardarStorage() {
 function VerificarCargar() {
   let arrayCarrito = JSON.parse(localStorage.getItem("carroOlvidado")); //Trae el carrito de la storage.
   if(arrayCarrito) { //Si hay algo...
-    const Toast = Swal.mixin({ //Sweet alert tu carrito espera.
+    const Toast = Swal.mixin({ //Toast tu carrito espera.
       toast: true,
       position: 'top-end',
       showConfirmButton: false,
-      timer: 2000,
+      timer: 1800,
       timerProgressBar: true,
       didOpen: (toast) => {
         toast.addEventListener('mouseenter', Swal.stopTimer)
@@ -173,10 +180,8 @@ function VerificarCargar() {
       position: 'right',
       gravity: "top"
   }).showToast()
-
     //Agregar al carrito el array de storage
     CrearBotones();
-
     for(elemento of arrayCarrito ) {
       AgregarCarrito(elemento.codigo);
     }
@@ -185,3 +190,5 @@ function VerificarCargar() {
     localStorage.clear();
   },1900);
 }
+
+
