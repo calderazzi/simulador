@@ -11,9 +11,11 @@ body::-webkit-scrollbar {
   background-image: url(imagenes/fashion.webp);
 }
 
+
 #containerInputs {
+  display: none;
   width: auto;
-  height: 130px;
+  height: 145px;
   text-align: center;
 }
 #nombreProductoBuscar {
@@ -85,9 +87,9 @@ legend {
 }
 
 .articulo {
+  display: inline-flexbox;
   background-color: rgba(54, 133, 11, 0.213);
-  margin: 15px;
-  margin-bottom: 10px;
+  margin: 10px;
   border: 10px solid rgb(72, 211, 30);
   border-radius: 0 35px;
   width: 230px;
@@ -161,7 +163,7 @@ a {
   bottom: -15px;
   top: 60px;
   right: 0;
-  background-color: rgba(35, 107, 8, 0.831);
+  background-color: rgba(34, 107, 8, 0.956);
   display: grid;
   list-style: none;
   clip-path: circle(0% at top right);
@@ -390,7 +392,7 @@ section {
 
 @media only screen and (max-width: 730px) {
   #containerInputs {
-    width: 80%;
+    width: 98%;
 
   }
   #nombreProductoBuscar {
@@ -423,19 +425,14 @@ section {
     font-size: 18px;
     margin-left: -30px;
   }
-  i {
-    font-size: 20px;
+  i:hover {
+    font-size: 23px;
   }
   h2 {
     font-size: 23px;
   }
   h3 {
     font-size: 20px;
-  }
-  .articulo {
-    margin-top: 45px;
-    margin-bottom: 0;
-    margin-left: 60px;
   }
   #esconder {
     font-size: 15px;
@@ -464,5 +461,48 @@ section {
   }
   #imgCarro {
     display: none;
+  }
+}
+@media only screen and (max-width: 430px) {
+  i {
+    font-size: 20px;
+  }
+  #containerInputs {
+    height: 120px;
+  }
+  #list {
+    font-size: 15px;
+  }
+  #nombreProductoBuscar {
+    margin-top: 50px;
+  }
+  .articulo {
+    width: 320px;
+    height: 400px;
+    margin-left: 20px;
+  }
+  .imagen {
+    margin-top: -25px;
+    width: 300px;
+    height: 300px;
+  }
+  .precio {
+    width: 320px;
+    margin-top: -10px;
+  }
+  .button {
+    height: 40px;
+    margin-top: 0;
+  }
+  .codigo {
+    margin-top: -10px;
+    font-size: 15px;
+  }
+  .stock {
+    margin-top: -315px;
+    margin-left: 12px;
+  }
+  .btnEliminar {
+    height: 27px;
   }
 }
