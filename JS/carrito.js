@@ -32,12 +32,12 @@ function AgregarCarrito(code) {
 }
 
 function Actualizacion(producto) {
-  MermarStock(producto); 
   SumarCarrito(); 
   carritoStorage.push(producto);
   GuardarStorage(); 
   SinStock(producto.codigo); 
   ContadorCarrito();
+  MermarStock(producto); 
 }
 
 function CrearBotones() {

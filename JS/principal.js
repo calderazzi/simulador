@@ -4,23 +4,16 @@ document.getElementById("principio").style.display = "none"; //Sacando la imagen
 document.getElementById("barra").style.display = "none"; //Ocultando barra de carga.
 document.getElementById("nav").style.display = "flex"; //Mostrando Navegación.
 document.getElementById("body").style.backgroundImage = "radial-gradient(rgb(35, 35, 142), rgb(23, 170, 94))" //Cambiando el background del body.
-
+document.getElementById("containerInputs").style.display = "block"
 let listaProductos = document.getElementById(`container`); //Contenedor de las tarjetas.
 
-// function MostrarProductos() {
- 
-// }
-
-
-VerificarCargar(); 
-
-RenderizarHtml(arrayProductos);
+MostrarProductos(arrayProductos);
 const nombreProductoAgregar = document.getElementById(`nombreProductoBuscar`);
 nombreProductoAgregar.addEventListener(`input`, () => {
   let encontrados = arrayProductos.filter(({nombre}) => {
     return nombre.toLowerCase().includes(nombreProductoAgregar.value.toLowerCase());
   });
-  RenderizarHtml(encontrados);
+  MostrarProductos(encontrados);
 });
 
 const btnBuscar = document.getElementById("btnBuscar");
@@ -28,15 +21,15 @@ btnBuscar.addEventListener(`click`, ()=> {
   let desde = document.getElementById("desde").value;
   let hasta = document.getElementById("hasta").value;
   if(desde == 0 || hasta == 0) {
-    RenderizarHtml(arrayProductos)
+    MostrarProductos(arrayProductos)
   }
   let encontrados = arrayProductos.filter(({precio})=> {
     return Number(precio) >= desde && Number(precio) <= hasta;
   });
-  RenderizarHtml(encontrados);
+  MostrarProductos(encontrados);
 })
 
-function RenderizarHtml(array) {
+function MostrarProductos(array) {
   listaProductos.innerHTML = "";
   if(array.length === 0) {
     const Toast = Swal.mixin({ 
@@ -56,7 +49,7 @@ function RenderizarHtml(array) {
       position: 'left',
       gravity: "top"
   }).showToast()
-    RenderizarHtml(arrayProductos);
+    MostrarProductos(arrayProductos);
   }
   array.forEach(({codigo, nombre, imagen, descripcion, stock, precio}) => {
     // arrayProductos.forEach(prod => { 
@@ -89,7 +82,7 @@ function RenderizarHtml(array) {
     })
   })
 }
-
+VerificarCargar(); 
 
 
 },1900);
