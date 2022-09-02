@@ -12,12 +12,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Electrolize&family=Pacifico&display=swap" rel="stylesheet">
   <!-- ICONOS -->
   <script src="https://kit.fontawesome.com/d7d9422d2d.js" crossorigin="anonymous"></script>
-
+  <link rel="icon" type="text/css" href="imagenes/w.ico">
   <title>Wilson Calderazzi (simulador interactivo)</title>
 </head>
 <header>
   <nav id="nav">
     <h1 class="nav_logo"><a href="empleados.html">Wilson Calderazzi</a></h1>
+    <div id="avatar"></div>
     <div id="esconder">
       <p class="tot">Total: $</p>
       <p id="total">0</p>
@@ -29,17 +30,20 @@
     </ul> 
   </nav>
 </header>
-<body id="body">
+<body id="body" onload="onLoad()">
   <h1 id="principio">WILSON CALDERAZZI</h1>
   <div id="containerInputs">
+    <div id="temperatura"></div>
     <input class="input" id="nombreProductoBuscar" type="text" placeholder="Producto a buscar">
     <div>
         <input class="input" id="desde" type="number" placeholder="Desde $ (pesos)">
         <input class="input" id="hasta" type="number" placeholder="Hasta $ (pesos)">
         <button id="btnBuscar">BUSCAR</button>
+        <a id="volver"><i class="fa-solid fa-arrow-rotate-left"></i></a>
     </div>
-</div>
+  </div>
   <section id="container">
+    <h2 class="barra">Recuperando los productos de la base de datos...</h2>
     <progress id="barra"></progress>
   </section>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
