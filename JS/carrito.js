@@ -5,7 +5,7 @@ const listaCarrito = document.getElementById(`carro`);
 const precioTotal = document.getElementById(`total`);
 let contador = document.getElementById("contador").innerText;
 //Agregando el producto al carrito si no existe, sino lo sumamos.
-function AgregarCarrito(code) {
+function AddCart(code) {
   let estaEnCarrito = carrito.find(producto => producto.codigo === code);
   if(estaEnCarrito) {
     let precioCard = document.getElementById(`precio${code}`).innerText;
@@ -15,7 +15,7 @@ function AgregarCarrito(code) {
       estaEnCarrito.precio += Number(precioCard);
       document.getElementById(`cantidad${estaEnCarrito.codigo}`).innerHTML = `<p id="cantidad${estaEnCarrito.cantidad}">${estaEnCarrito.cantidad}</p>`;
       document.getElementById(`precioCarro${estaEnCarrito.codigo}`).innerHTML = `<p id="precioCarro${estaEnCarrito.codigo}">$${estaEnCarrito.precio}</p>`;
-      Actualizacion(estaEnCarrito);
+      Refresh(estaEnCarrito);
     };
   }else{
     let contenedor = document.createElement(`div`);
@@ -24,23 +24,23 @@ function AgregarCarrito(code) {
     let productoAgregar = arrayProductos.find(item=> item.codigo === code);
     productoAgregar.cantidad = 1;
     carrito.push(productoAgregar);
-    CrearBotones();
+    Buttons();
     document.getElementById(`esconder`).style.display = "flex";
-    Actualizacion(productoAgregar);
-    MostrarCarrito(productoAgregar)
+    Refresh(productoAgregar);
+    ShowCart(productoAgregar)
   };
 };
 //Actualizacion para reducir código repetido.
-function Actualizacion(producto) {
-  SumarCarrito(); 
+function Refresh(producto) {
+  CartAdd(); 
   carritoStorage.push(producto);
-  GuardarStorage(); 
-  SinStock(producto.codigo); 
-  ContadorCarrito();
-  MermarStock(producto); 
+  SaveStorage(); 
+  OutStock(producto.codigo); 
+  CartCount();
+  DecreaseStock(producto); 
 };
 //Creación de botones.
-function CrearBotones() {
+function Buttons() {
   if(carrito.length == 1) {
     document.getElementById("iconoCarrito").style.color = "blue";
     let divBorrar = document.createElement(`div`);
@@ -58,8 +58,8 @@ function CrearBotones() {
         confirmButtonText: 'Si, Borrar!'
       }).then((result) => {
         if(result.isConfirmed) {
-          BorrarCarrito();
-          ActualizarStock();
+          ClearCart();
+          StockUpdate();
           Swal.fire({
             title: 'Confirmado!',
             showConfirmButton: false,
@@ -79,12 +79,12 @@ function CrearBotones() {
         'CBU: 14300017133003874820011',
         'success'
       );
-      ComprarCarrito(); 
+      BuyCart(); 
     });
   };
 };
 //Crear carrito.
-function MostrarCarrito(productoAgregar) { 
+function ShowCart(productoAgregar) { 
   let div = document.createElement(`div`);
   div.setAttribute("id", "list");
   div.innerHTML = `<img id="imgCarro" src="${productoAgregar.imagen}">
@@ -93,11 +93,11 @@ function MostrarCarrito(productoAgregar) {
                    <p id="precioCarro${productoAgregar.codigo}">$${productoAgregar.precio}</p>
                    <button class="btnEliminar" id="btnEliminar${productoAgregar.codigo}"><i class="fa-solid fa-trash-can"></i></button>`;
   document.getElementById("contenedor").appendChild(div);
-  SumarCarrito();
-  EliminarProducto(productoAgregar); 
+  CartAdd();
+  DeleteProduct(productoAgregar); 
 }
 //Eliminar productos del carrito.
-function EliminarProducto(productoAgregar) {
+function DeleteProduct(productoAgregar) {
   let btnEliminar = document.getElementById(`btnEliminar${productoAgregar.codigo}`);
   btnEliminar.addEventListener(`click`,()=> {
     if(productoAgregar.cantidad > 1) {
@@ -106,22 +106,22 @@ function EliminarProducto(productoAgregar) {
       productoAgregar.precio -= precioCard;
       document.getElementById(`cantidad${productoAgregar.codigo}`).innerHTML = `<p id="cantidad${productoAgregar.cantidad}">${productoAgregar.cantidad}</p>`;
       document.getElementById(`precioCarro${productoAgregar.codigo}`).innerHTML = `<p id="precioCarro${productoAgregar.codigo}">$${productoAgregar.precio}</p>`;
-      ActualizarEliminar(productoAgregar);
+      RefreshDelete(productoAgregar);
     }else{
       carrito = carrito.filter(item => item.codigo !== productoAgregar.codigo);
       btnEliminar.parentElement.remove();
-      ActualizarEliminar(productoAgregar);
+      RefreshDelete(productoAgregar);
     };
   });
 };
 //Actualizacion para reducir codigo en eliminar.
-function ActualizarEliminar(producto) {
-  SumarStock(producto);
-  SumarCarrito();
-  ContadorMermaCarrito();
+function RefreshDelete(producto) {
+  StockAdd(producto);
+  CartAdd();
+  CountSubtractCart();
 };
 //Suma del carrito.
-function SumarCarrito() {
+function CartAdd() {
   precioTotal.innerText = carrito.reduce((acc,num)=> acc + num.precio, 0);
   let tototalCarrito = document.getElementById("total").innerText;
   if(tototalCarrito == 0) {
@@ -135,33 +135,33 @@ function SumarCarrito() {
   };
 };
 //Comprar carrito.
-function ComprarCarrito() {
-  BorrarCarrito();
+function BuyCart() {
+  ClearCart();
   location.hash = "#";
 };
 //Borrar todo el carrito.
-function BorrarCarrito() {
+function ClearCart() {
   localStorage.clear();
   document.getElementById('contenedor').innerHTML = '';
   carrito = [];
-  SumarCarrito();
+  CartAdd();
 };
 //Sumador del numero de productos en carrito.
-function ContadorCarrito() {
+function CartCount() {
   contador++;
   document.getElementById("contador").innerText = contador;
 };
 //Resta del numero de productos en carrito.
-function ContadorMermaCarrito(){
+function CountSubtractCart(){
   contador--;
   document.getElementById("contador").innerText = contador;
 };
 //Guardar en el storage el carrito.
-function GuardarStorage() {
+function SaveStorage() {
   localStorage.setItem("carroOlvidado",JSON.stringify(carritoStorage));
 };
 //Carga del storage al carrito.
-function VerificarCargar() {
+function VerifyStorage() {
   let arrayCarrito = JSON.parse(localStorage.getItem("carroOlvidado"));
   if(arrayCarrito) {
     const Toast = Swal.mixin({
@@ -181,9 +181,9 @@ function VerificarCargar() {
       position: 'right',
       gravity: "top"
   }).showToast()
-    CrearBotones();
+    Buttons();
     for(elemento of arrayCarrito ) {
-      AgregarCarrito(elemento.codigo);
+      AddCart(elemento.codigo);
     };
   };
   setTimeout(function(){

@@ -1,12 +1,16 @@
-//Api del clima.
+const listaProductos = document.getElementById(`container`);
 const apiKey = `dcacea55e6bce077bd20412a0dc1c31f`;
+const nombreProductoAgregar = document.getElementById(`nombreProductoBuscar`);
+const btnBuscar = document.getElementById("btnBuscar");
+
+//Api del clima.
 const fetchData = position => {
   const {latitude, longitude} = position.coords;
   fetch(`https://api.openweathermap.org/data/2.5/weather?units=metric&lat=${latitude}&lon=${longitude}&appid=${apiKey}`)
   .then(response => response.json())
-  .then(data => setWeatherData(data))
+  .then(data => WeatherData(data))
 };
-const setWeatherData = data => {
+const WeatherData = data => {
   let temperatura = document.getElementById("temperatura");
   temperatura.innerHTML = `La Temperatura en ${data.name} es de ${data.main.temp}°`
   if(Number(data.main.temp) > 16) {
@@ -25,10 +29,9 @@ const setWeatherData = data => {
     });
   };
 };
-const onLoad = ()=> {
+const OnLoad = ()=> {
   navigator.geolocation.getCurrentPosition(fetchData);
 };
-let listaProductos = document.getElementById(`container`);
 //Api de github.
 fetch('https://api.github.com/users/calderazzi')
     .then((resp) => resp.json())
@@ -39,7 +42,7 @@ fetch('https://api.github.com/users/calderazzi')
           Swal.fire("error");
       });
   //Traer productos de la base de datos.
-const retornarProductos =() => {
+const ReturnProducts =() => {
   return new Promise((resolve) => {
     setTimeout(()=> {
       document.getElementById("principio").style.display = "none";
@@ -52,41 +55,39 @@ const retornarProductos =() => {
   });
 };
 //Retornar los productos traidos de la base de datos.
-retornarProductos().then((respuesta)=>{
+ReturnProducts().then((respuesta)=>{
   listadoDeProductos = respuesta;
-  MostrarProductos(listadoDeProductos);
+  ShowProducts(listadoDeProductos);
 });
-const nombreProductoAgregar = document.getElementById(`nombreProductoBuscar`);
 nombreProductoAgregar.addEventListener(`input`, () => {
   let encontrados = listadoDeProductos.filter(({nombre}) => {
     return nombre.toLowerCase().includes(nombreProductoAgregar.value.toLowerCase());
   });
-  MostrarProductos(encontrados);
+  ShowProducts(encontrados);
 });
 //Busqueda por precio.
-const btnBuscar = document.getElementById("btnBuscar");
 btnBuscar.addEventListener(`click`, ()=> {
-  let desde = document.getElementById("desde").value;
-  let hasta = document.getElementById("hasta").value;
-  Resetear();
+  const desde = document.getElementById("desde").value;
+  const hasta = document.getElementById("hasta").value;
+  Reset();
   let encontrados = listadoDeProductos.filter(({precio})=> {
   return Number(precio) >= desde && Number(precio) <= hasta;
   });
-  MostrarProductos(encontrados);
+  ShowProducts(encontrados);
 });
 //Reseteado de la busqueda por precio.
-function Resetear() {
+function Reset() {
   document.getElementById("desde").value = '';
   document.getElementById("hasta").value = '';
   const volver = document.getElementById("volver");
   volver.style.display = "contents";
   volver.addEventListener(`click`, ()=> {
-    MostrarProductos(listadoDeProductos);
+    ShowProducts(listadoDeProductos);
     volver.style.display = "none";
   });
 };
 //Muestra los productos.
-function MostrarProductos(array) {
+function ShowProducts(array) {
   listaProductos.innerHTML = "";
   if(array.length === 0) {
     document.getElementById("volver").style.display = "none";
@@ -107,16 +108,13 @@ function MostrarProductos(array) {
       position: 'left',
       gravity: "top"
   }).showToast();
-    MostrarProductos(listadoDeProductos);
+    ShowProducts(listadoDeProductos);
   };
   array.forEach(({codigo, nombre, imagen, descripcion, stock, precio}) => {
     let div = document.createElement(`div`);
-    div.className = `container`;
     div.innerHTML = `<div id="card${codigo}" class="articulo">
-                      <div class="nombre"><h2>${nombre}</h2></div>
-                      <div class="cont">
+                      <h2>${nombre}</h2>
                       <img id="imagen${codigo}" class="imagen" src="${imagen}"><p class="descripcion">Descripción: ${descripcion}</p>
-                      </div>
                       <div class="sinStock" id="sinStock${codigo}">SIN STOCK</div>
                       <div class="stock" id="stockCard${codigo}">${stock}</div>
                       <div class="precio">
@@ -133,9 +131,9 @@ function MostrarProductos(array) {
     listaProductos.appendChild(div);
     let btnAgregar = document.getElementById(`btn${codigo}`);
     btnAgregar.addEventListener(`click`,()=> {
-      AgregarCarrito(codigo); 
-      SinStock(codigo); 
+      AddCart(codigo); 
+      OutStock(codigo); 
     });
   });
-  VerificarCargar();
+  VerifyStorage();
 };

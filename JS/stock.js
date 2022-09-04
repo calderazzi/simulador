@@ -1,17 +1,17 @@
-function MermarStock(productoAgregar) { 
+function DecreaseStock(productoAgregar) { 
   let stockCard = document.getElementById(`stockCard${productoAgregar.codigo}`).innerText; //Id stock del producto.
   stockCard--; //Mermar 1 producto del stock.
   document.getElementById(`stockCard${productoAgregar.codigo}`).innerText = stockCard; //Cambio de stock en el documento.
 } 
 
-function SumarStock(productoAgregar) { 
+function StockAdd(productoAgregar) { 
   let stockCard = document.getElementById(`stockCard${productoAgregar.codigo}`).innerText; //Id stock del producto.
   stockCard++; //Sumar 1 producto del stock.
   document.getElementById(`stockCard${productoAgregar.codigo}`).innerText = stockCard; //Cambio de stock en el documento.
-  stockCard == 1 && ConStock(productoAgregar); //Operador lógico and (&&).
+  stockCard == 1 && WithStock(productoAgregar); //Operador lógico and (&&).
 } 
 
-function SinStock(prod) {
+function OutStock(prod) {
   let cant = document.getElementById(`stockCard${prod}`).innerText; //Id del stock.
   if(cant == 0) { //Si es 0...
     //Oscurecer la tarjeta.
@@ -25,7 +25,7 @@ function SinStock(prod) {
   }
 }
 
-function ConStock(prod){ //Si tenemos stock volvemos al color la tarjeta.
+function WithStock(prod){ //Si tenemos stock volvemos al color la tarjeta.
   document.getElementById(`card${prod.codigo}`).style.backgroundColor = "rgba(54, 133, 11, 0.213)";
   document.getElementById(`card${prod.codigo}`).style.border = "10px solid rgb(72, 211, 30)";
   document.getElementById(`imagen${prod.codigo}`).style.filter = "none";
@@ -35,6 +35,6 @@ function ConStock(prod){ //Si tenemos stock volvemos al color la tarjeta.
   document.getElementById(`btn${prod.codigo}`).style.backgroundColor = "rgb(84, 159, 98)";
 }
 
-function ActualizarStock() {
+function StockUpdate() {
   location.reload(); //Actualizar el stock que viene de la base de datos.
 }
