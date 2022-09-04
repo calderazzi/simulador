@@ -102,10 +102,10 @@ h2 {
   color: rgb(11, 51, 11);
   font-weight: bolder;
   text-align: center;
-  text-decoration: underline;
   font-size: 25px;
   font-family: Georgia, 'Times New Roman', Times, serif;
   margin-top: 0;
+  height: 45px;
 }
 h3 {
   font-size: 26px;
@@ -114,9 +114,6 @@ h3 {
 h4 {
   margin: 0;
   padding: 0;
-}
-.nombre {
-  height: 60px;
 }
 .precio {
   width: 230px;
@@ -166,7 +163,7 @@ h4 {
   margin-top: -180px;
   width: 240px;
 }
-.cont:hover > .descripcion {
+.articulo:hover > .descripcion {
   display: block;
 }
 section {
